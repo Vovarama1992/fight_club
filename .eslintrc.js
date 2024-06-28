@@ -1,30 +1,28 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-    jsx: true,
-    },
-    },
-    settings: {
-    react: {
-    version: 'detect',
-    },
-    },
-    extends: [
-    'eslint:recommended',
+  parser: '@typescript-eslint/parser',
+  extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended', // Make sure this is always the last configuration in the extends array.
-    ],
-    plugins: ['react', '@typescript-eslint', 'jsx-a11y', 'prettier'],
-    rules: {
+    'next',
+    'next/core-web-vitals',
+    'prettier',
+  ],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
+  rules: {
+    'react/react-in-jsx-scope': 'off',
     'prettier/prettier': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'react/no-unknown-property': [
+      'error',
+      { ignore: ['stroke-width', 'stroke-linecap', 'stroke-linejoin'] },
+    ],
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
+  },
+  settings: {
+    react: {
+      version: 'detect',
     },
-    };
+  },
+};
