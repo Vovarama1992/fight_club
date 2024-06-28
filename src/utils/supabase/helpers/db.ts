@@ -302,7 +302,7 @@ export async function updateReferralEarlyBonus(
   client: SupabaseClient<Database, 'public'>,
   referralEarlyBonus: Tables<'Referrals_Early_Bonuses'>,
 ) {
-  const { data, error } = await client
+  const { error } = await client
     .from('Referrals_Early_Bonuses')
     .update({
       honey: referralEarlyBonus.honey,

@@ -2,18 +2,16 @@
 
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Button } from './ui/button';
-import Image from 'next/image';
+
 import React from 'react';
 import RankInfoCard from './rank-info-card';
-import { Tables } from '../../types/supabase';
-import { getRanks } from '@/utils/supabase/helpers/db';
-import { createClient } from '@/utils/supabase/client';
+
 import RankIcon from './rank-icon';
 import { useData } from '@/controllers/context';
 
 export default function RankDrawer() {
   // Supabase
-  const supabase = createClient();
+  /*const supabase = createClient();*/
   // Context
   const { user, userRank, ranks } = useData()!;
 

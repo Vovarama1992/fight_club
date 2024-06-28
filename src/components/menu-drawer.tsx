@@ -6,14 +6,7 @@ import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Drawer, DrawerContent, DrawerTrigger } from './ui/drawer';
 import { TelegramShareButton } from 'react-share';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from './ui/table';
+import { Table, TableBody, TableCell, TableRow } from './ui/table';
 import ReferralRewardCard from './referral-reward-card';
 import QuestCard from './quest-card';
 import { usePopup } from '@tma.js/sdk-react';

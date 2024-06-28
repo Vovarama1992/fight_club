@@ -2,31 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Progress } from '@/components/ui/progress';
 import { useData } from '@/controllers/context';
 import { useRouter } from 'next/navigation';
-import TargetStatsCard from '@/components/target-stats-card';
-import HoneyDisplay from '@/components/honey-display';
-import InfoPopover from '@/components/info-popover';
+
 import MenuButton from '@/components/menu-drawer';
-import RankDrawer from '@/components/rank-drawer';
-import { TAP_PROFIT } from '@/constants';
+
 import Wrapper from './button_wrapper';
 
 export default function Page() {
   const router = useRouter();
   // Context
-  const {
-    isPhone,
-    user,
-    userRank,
-    ranks,
-    leaders,
-    friends,
-    quests,
-    handleNewRank,
-    handlePlayerTap,
-  } = useData()!;
+  const { user, userRank, ranks, leaders, friends, quests } = useData()!;
   const [damage, setDamage] = useState(false);
   useEffect(() => {
     setTimeout(() => setDamage(false), 2600);
@@ -34,7 +20,7 @@ export default function Page() {
   const isContext = !user || !userRank || !ranks;
 
   // Handle coin interaction
-  async function coinInteraction() {
+  /*async function coinInteraction() {
     if (isContext) return;
 
     if (user.balance >= userRank.required_amount - TAP_PROFIT) {
@@ -44,7 +30,7 @@ export default function Page() {
     } else {
       const isTapDone = handlePlayerTap(TAP_PROFIT);
     }
-  }
+  }*/
 
   if (isContext) return router.replace('/');
   return (
@@ -56,9 +42,11 @@ export default function Page() {
       >
         <div id="wrap" className=" flex flex-col z-9999 h-[100%]">
           <div id="in1" className="w-[100%] flex items-end h-[72%] ">
-            <img
+            <Image
               src={damage ? '/bear_damage.gif' : '/bear.gif'}
               alt="bear"
+              width={100}
+              height={190}
               className="w-[100%] h-[190px] z-9999"
             />
           </div>
@@ -67,11 +55,13 @@ export default function Page() {
             id="in2"
             className="w-[100%] flex flex-col items-center justify-center h-[28%] "
           >
-            <img
+            <Image
               onClick={() => setDamage(true)}
               className="w-[100%] h-[100px] z-9999 ml-[55px]"
               src={damage ? '/bee_attack.gif' : '/bee.gif'}
               alt="bee"
+              width={100}
+              height={100}
             />
           </div>
         </div>

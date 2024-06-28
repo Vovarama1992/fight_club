@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import HoneyDisplay from '@/components/honey-display';
 import RankIcon from './rank-icon';
-import { Progress } from './ui/progress';
 
 export default function RankInfoCard(props: {
   name: string;

@@ -4,9 +4,7 @@ import { Exo_2 as GFont } from 'next/font/google';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
-import Script from 'next/script';
 import ProvidersWrapper from '@/components/sdk-provider-wrapper';
-import { useTelegramMock } from '@/hooks/useTelegramMock';
 
 const gFont = GFont({
   subsets: ['latin'],

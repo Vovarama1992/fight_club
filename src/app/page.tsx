@@ -8,7 +8,6 @@ import {
   InitData,
   retrieveLaunchParams,
   useInitData,
-  useMiniApp,
   User,
   useViewport,
 } from '@tma.js/sdk-react';
@@ -28,7 +27,7 @@ import { useTelegramMock } from '@/hooks/useTelegramMock';
 
 export default function Home() {
   const router = useRouter();
-  const miniApp = useMiniApp(true);
+
   const initData = useInitData(true);
   const viewport = useViewport(true);
 
@@ -48,6 +47,7 @@ export default function Home() {
   } = useData()!;
 
   const [isLoadError, setIsLoadError] = React.useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = React.useState(true);
   useTelegramMock();
   const handleTelegramMiniAppEvents = React.useCallback(async () => {
@@ -158,6 +158,7 @@ export default function Home() {
       let sessionUser;
 
       if (miniAppData.startParam) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [_, referralId] = miniAppData.startParam.split('-');
         const referralUser = await getUserTelegramId(supabase, +referralId);
 

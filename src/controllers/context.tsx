@@ -3,25 +3,17 @@
 import * as React from 'react';
 import { Database, Tables } from '../../types/supabase';
 import { createClient } from '@/utils/supabase/client';
-import {
-  getPlayerReferrals,
-  getUsersByReferral,
-  updatePlayer,
-  updateUserStats,
-} from '@/utils/supabase/helpers/db';
+import { updateUserStats } from '@/utils/supabase/helpers/db';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { useMiniApp, useInitData } from '@tma.js/sdk-react';
 
 interface ContextType {
-  supabase: SupabaseClient<Database, 'public', any>;
-  //
+  supabase: SupabaseClient<Database, 'public'>;
   isNew: boolean;
   setStateIsNew: (value: boolean) => void;
   justReferred: ReferredPlayer | null;
   setStateJustReferred: (value: ReferredPlayer) => void;
   isPhone: boolean;
   setStateIsPhone: (value: boolean) => void;
-  //
   user: Tables<'users'> | null;
   setStateUser: (value: Tables<'users'>) => void;
   userRank: Tables<'ranks'> | null;
@@ -44,8 +36,8 @@ export function ContextProvider({ children }: React.PropsWithChildren) {
   // Supabase SDK
   const supabase = createClient();
   // Telegram SDK
-  const miniApp = useMiniApp(true);
-  const initData = useInitData(true);
+  /*const miniApp = useMiniApp(true);
+  const initData = useInitData(true);*/
 
   const [isNew, setIsNew] = React.useState<boolean>(false);
   const [justReferred, setJustReferred] = React.useState<ReferredPlayer | null>(
@@ -96,10 +88,16 @@ export function ContextProvider({ children }: React.PropsWithChildren) {
       return true;
     },
     handlePlayerTap: function (profitTap: number): boolean {
-      setUser((prevState) => ({
-        ...prevState!,
-        balance: prevState?.balance! + profitTap,
-      }));
+      setUser((prevState) => {
+        if (!prevState) {
+          // Либо выбросьте ошибку, либо выполните какое-то действие, если prevState отсутствует
+          throw new Error('User state is not defined');
+        }
+        return {
+          ...prevState,
+          balance: prevState.balance + profitTap,
+        };
+      });
       return true;
     },
   };
