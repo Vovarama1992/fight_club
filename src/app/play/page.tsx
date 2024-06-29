@@ -14,9 +14,25 @@ export default function Page() {
   // Context
   const { user, userRank, ranks, leaders, friends, quests } = useData()!;
   const [damage, setDamage] = useState(false);
+  const [position, setHead] = useState(0);
+  const head = position.toString().padStart(2, '0');
   useEffect(() => {
-    setTimeout(() => setDamage(false), 2600);
-  });
+    let newPosition = 0;
+    if (damage) {
+      const motion = setInterval(() => {
+        setHead((prevPosition) => {
+          newPosition = prevPosition + 1;
+          return newPosition;
+        });
+      }, 100);
+      setTimeout(() => {
+        setDamage(false);
+        clearInterval(motion);
+      }, 2300);
+    }
+    return () => setHead(0);
+  }, [damage]);
+
   const isContext = !user || !userRank || !ranks;
 
   // Handle coin interaction
@@ -36,7 +52,7 @@ export default function Page() {
   return (
     <main className=" w-[100%] h-[100%] relative hscreen bg-[url(/main_fon.png)] bg-contain bg-cover bg-center bg-no-repeat  flex flex-col relative  z-0">
       <div className=" flex flex-row justify-center z-9999 w-full h-[20%]">
-        <div className="flex w-[700px] h-full flex-col items-center bg-red-500 z-9999">
+        <div className="flex w-[700px] h-full flex-col items-center  z-9999">
           <div className=" bg-[url(/interface/target-box.png)] mt-[15px]  bg-contain bg-center bg-no-repeat w-[50%] h-[60%]"></div>
           <div className="  bg-[url(/interface/target-progress.png)] mt-[15px]  bg-contain bg-center bg-no-repeat w-[50%] h-[30%]"></div>
         </div>
@@ -44,10 +60,10 @@ export default function Page() {
 
       <div
         id="fight_club"
-        className="w-full h-[60%] inline-flex items-start justify-center  bg-green-500 z-9999"
+        className="w-full h-[60%] inline-flex items-start justify-center   z-9999"
       >
-        <div id="wrap" className=" flex flex-col z-9999 bg-white h-[100%]">
-          <div id="in1" className="w-[100%] flex items-end h-[72%] mb-[20px] ">
+        <div id="wrap" className=" flex flex-col z-9999  h-[100%]">
+          <div id="in1" className="w-[100%] flex items-end h-[72%] mb-[-30px] ">
             <Image
               src={damage ? '/bear_damage.gif' : '/bear.gif'}
               alt="bear"
@@ -59,13 +75,19 @@ export default function Page() {
 
           <div
             id="in2"
-            className="relative w-[auto] flex flex-col items-center justify-center h-[28%] mb-[100px] bg-red-300 z-9999"
+            className="relative w-[auto] flex flex-col items-center justify-center h-[28%] mb-[100px]  z-9999"
           >
-            <img
+            <Image
               alt="head"
-              src={damage ? './head_back.png' : './bee_head.png'}
+              width={100}
+              height={100}
+              src={
+                damage
+                  ? `/bee_head/upfront/пчела01-голова вперед меч_${head}.png`
+                  : '/bee_head.png'
+              }
               className="absolute left-[25%] top-[24%] w-[70px] h-[25%]"
-            ></img>
+            />
             <Image
               onClick={() => setDamage(true)}
               className="w-[100%] h-[75%] z-9999 ml-[55px]"
