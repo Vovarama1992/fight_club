@@ -59,7 +59,7 @@ export default function Page() {
 
           <div
             id="in2"
-            className="relative w-[auto] flex flex-col items-center justify-center h-[28%] bg-red-300 z-9999"
+            className="relative w-[auto] flex flex-col items-center justify-center h-[28%] mb-[100px] bg-red-300 z-9999"
           >
             <img
               alt="head"
