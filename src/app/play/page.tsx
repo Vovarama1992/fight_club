@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useData } from '@/controllers/context';
 import { useRouter } from 'next/navigation';
-
+import { Progress } from '@radix-ui/react-progress';
 import MenuButton from '@/components/menu-drawer';
 
 import Wrapper from './button_wrapper';
@@ -34,14 +34,20 @@ export default function Page() {
 
   if (isContext) return router.replace('/');
   return (
-    <main className=" w-[100%] h-[100%] relative hscreen bg-[url(/main_fon.png)] bg-cover bg-center bg-no-repeat  flex flex-col relative  z-0">
-      <div className=" z-9999 w-full h-[20%]"></div>
+    <main className=" w-[100%] h-[100%] relative hscreen bg-[url(/main_fon.png)] bg-contain bg-cover bg-center bg-no-repeat  flex flex-col relative  z-0">
+      <div className=" flex flex-row justify-center z-9999 w-full h-[20%]">
+        <div className="flex w-[700px] h-full flex-col items-center bg-red-500 z-9999">
+          <div className=" bg-[url(/interface/target-box.png)] mt-[15px]  bg-contain bg-center bg-no-repeat w-[50%] h-[60%]"></div>
+          <div className="  bg-[url(/interface/target-progress.png)] mt-[15px]  bg-contain bg-center bg-no-repeat w-[50%] h-[30%]"></div>
+        </div>
+      </div>
+
       <div
         id="fight_club"
-        className="w-full h-[60%] inline-flex items-start justify-center   z-9999"
+        className="w-full h-[60%] inline-flex items-start justify-center  bg-green-500 z-9999"
       >
-        <div id="wrap" className=" flex flex-col z-9999 h-[100%]">
-          <div id="in1" className="w-[100%] flex items-end h-[72%] ">
+        <div id="wrap" className=" flex flex-col z-9999 bg-white h-[100%]">
+          <div id="in1" className="w-[100%] flex items-end h-[72%] mb-[20px] ">
             <Image
               src={damage ? '/bear_damage.gif' : '/bear.gif'}
               alt="bear"
@@ -53,11 +59,16 @@ export default function Page() {
 
           <div
             id="in2"
-            className="w-[100%] flex flex-col items-center justify-center h-[28%] "
+            className="relative w-[auto] flex flex-col items-center justify-center h-[28%] bg-red-300 z-9999"
           >
+            <img
+              alt="head"
+              src={damage ? './head_back.png' : './bee_head.png'}
+              className="absolute left-[25%] top-[24%] w-[70px] h-[25%]"
+            ></img>
             <Image
               onClick={() => setDamage(true)}
-              className="w-[100%] h-[100px] z-9999 ml-[55px]"
+              className="w-[100%] h-[75%] z-9999 ml-[55px]"
               src={damage ? '/bee_attack.gif' : '/bee.gif'}
               alt="bee"
               width={100}
